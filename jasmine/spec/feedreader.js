@@ -31,15 +31,31 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
+         it('url defined', function() {
+           allFeeds.forEach(function(feed) {
+               expect(feed.url).toBeDefined();
+               expect(feed.url.length).not.toBe(0);
+           });
+         });
 
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+         it('name defined', function() {
+           allFeeds.forEach(function(feed) {
+               expect(feed.name).toBeDefined();
+               expect(feed.name.length).not.toBe(0);
+           });
+         });
     });
 
-
+    describe('The menu', function() {
+      var bodyElement;
+      beforeEach(function(){
+        bodyElement = document.getElementsByTagName('body')[0];
+      });
     /* TODO: Write a new test suite named "The menu" */
 
         /* TODO: Write a test that ensures the menu element is
@@ -47,12 +63,32 @@ $(function() {
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
+         it('hidden menu', function() {
+           expect(bodyElement.className).toBe('menu-hidden');
+         });
 
          /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+          it('visibility menu', function() {
+            var menuIcon = document.getElementsByClassName('menu-icon-link')[0];
+            expect(bodyElement.className).toBe('menu-hidden');
+            menuIcon.click();
+            expect(bodyElement.className).toBe('');
+            menuIcon.click();
+            expect(bodyElement.className).toBe('menu-hidden');
+          });
+        });
+
+      describe('Initial Entries', function() {
+        var container = document.getElementsByClassName('feed')[0];
+
+        beforeEach(function(done){
+          loadFeed(0);
+          done();
+        });
 
     /* TODO: Write a new test suite named "Initial Entries" */
 
@@ -62,6 +98,14 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+        it('loadFeed complete', function(done) {
+        expect(container.hasChildNodes()).toBe(true);
+        done();
+         });
+       });
+
+
+
 
     /* TODO: Write a new test suite named "New Feed Selection" */
 
