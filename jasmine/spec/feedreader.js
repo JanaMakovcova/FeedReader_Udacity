@@ -86,8 +86,9 @@ $(function() {
         var container = document.getElementsByClassName('feed')[0];
 
         beforeEach(function(done){
-          loadFeed(0);
-          done();
+          loadFeed(0, function(){
+            done()
+          });
         });
 
     /* TODO: Write a new test suite named "Initial Entries" */
@@ -104,13 +105,22 @@ $(function() {
          });
        });
 
+       describe('New Feed Selection', function() {
+         var container = document.getElementsByClassName('feed')[0];
 
-
-
+         beforeEach(function(done){
+           loadFeed(0, function(){
+             done();
+           });
+         });
     /* TODO: Write a new test suite named "New Feed Selection" */
 
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
+         * Remember, loadFeed() is asynchronous.*/
+         it('newFeed changed', function(done) {
+         done();
+          });
+       });
+
 }());
