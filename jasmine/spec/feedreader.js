@@ -79,7 +79,7 @@ $(function() {
       */
         beforeEach(function(done){
           loadFeed(0, function(){
-            done()
+            done();
           });
         });
         /* save first element with class 'feed' to variable container
