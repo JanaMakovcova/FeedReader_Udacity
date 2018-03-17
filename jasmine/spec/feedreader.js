@@ -54,7 +54,7 @@ $(function() {
          * hidden by default. Checking if body has class 'menu-hidden'
          */
          it('hidden menu by default', function() {
-           expect(bodyElement.className).toBe('menu-hidden');
+           expect($(bodyElement).hasClass('menu-hidden')).toBe(true);
          });
          /*Test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
@@ -64,11 +64,11 @@ $(function() {
           */
           it('visibility menu', function() {
             var menuIcon = document.getElementsByClassName('menu-icon-link')[0];
-            expect(bodyElement.className).toBe('menu-hidden');
+            expect($(bodyElement).hasClass('menu-hidden')).toBe(true);
             menuIcon.click();
-            expect(bodyElement.className).toBe('');
+            expect($(bodyElement).hasClass('menu-hidden')).toBe(false);
             menuIcon.click();
-            expect(bodyElement.className).toBe('menu-hidden');
+            expect($(bodyElement).hasClass('menu-hidden')).toBe(true);
           });
         });
       /* Test suite for entries to Feeds
@@ -92,6 +92,7 @@ $(function() {
          */
         it('loadFeed complete', function(done) {
         expect(container.hasChildNodes()).toBe(true);
+        expect($(container.firstElementChild.firstElementChild).hasClass('entry')).toBe(true);
         done();
         });
       });
@@ -105,13 +106,14 @@ $(function() {
          */
          beforeEach(function(done){
            loadFeed(0, function(){
-             done();
-             loadFeed(1, function(done){
+             firstFeed = document.getElementsByClassName('feed')[0].innerHTML;
+             loadFeed(1, function(){
+               secondFeed = document.getElementsByClassName('feed')[0].innerHTML;
+               done();
              });
-             firstFeed = document.getElementsByClassName('feed')[0];
            });
-           secondFeed = document.getElementsByClassName('feed')[0];
          });
+
         /* Test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          */
